@@ -40,3 +40,28 @@
 
  cascade는 A를 영속화 할 때 B도 함께 영속화 할지에 대한 내용이다. mappedBy는 관계 없음
     단순하게 A -> B 관계가 cascade로 되어 있으면 A엔티티를 PERSIST할 때 B 엔티티도 연쇄해서 함께 PERSIST 한다.
+
+  cascade의 범위
+    // 라이프 사이클을 동일하게 관리한다.
+    참조하는 대상이 자기 자신 밖에 없을 때 사용하는 것이 좋음
+    ex) Order -> delivery 참조 (delivery는 Order만 참조한다) cascade o
+        Order -> orderItem 참조 (orderItem Order만 참조한다) cascade o
+
+
+ 더티 체킹
+   Transaction 안에서 엔티티의 변경이 일어나면, 변경 내용을 자동으로 데이터베이스에 반영하는 JPA 특징입니다.
+   데이터베이스에 변경 데이터를 저장하는 시점 :
+    1) Transaction commit 시점
+    2) EntityManager flush 시점
+    3) JPQL 사용 시점
+   또한, 영속성 컨택스트(Persistence Context) 안에 있는 엔티티를 대상으로 더티 체킹이 일어난다
+
+ 트랜잭션 commit 순간 EntityManger flush 하다
+
+ spring transactional 은 기본 전략 test 케이스에서 rollback  => 따라서 test에서는 영속성 context flush 안함
+
+ 단순히 order를 orderRepository로 조회를 하게 되면 order와 연관된 모든 엔티티들이 영속상태가 된다.
+
+ JPA에서 동적쿼리를 어떻게 해결해야 하는 가?
+    값이 있을 수도 없을 수도 있다 => 동적 쿼리
+    querydsl 사용 하는 것이 좋음, criteria 라는 jpa 표준 스펙이 있지만 쿼리문이 쉽게 떠올르지 않아 유지보수가 어렵다.

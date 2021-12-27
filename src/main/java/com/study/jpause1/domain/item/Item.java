@@ -1,6 +1,7 @@
 package com.study.jpause1.domain.item;
 
 import com.study.jpause1.domain.Category;
+import com.study.jpause1.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +26,16 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    // 비즈니스 로직 // 정보 전문가 패턴 // 객체를 가지고 있는 곳에서 비즈니스 로직을 다룬다 // 응집력을 위해
+    public void addStock(int quantity){
+        this.stockQuantity += quantity;
+    }
+    public void removeStock(int quantity){
+        int restStock = this.stockQuantity - quantity;
+        if(restStock<0){
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }

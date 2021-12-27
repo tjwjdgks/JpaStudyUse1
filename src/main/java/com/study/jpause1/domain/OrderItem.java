@@ -25,4 +25,27 @@ public class OrderItem {
     private int orderPrice;
 
     private int count;
+
+    // 기본 생성자 못쓰도록 막는다 // 생성 메서드 사용 유도
+    protected OrderItem() {
+
+    }
+
+    // == 생성 매서드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    public void cancel() {
+        getItem().addStock(count);
+    }
+    public int getTotalPrice(){
+        return getOrderPrice() * getCount();
+    }
 }
