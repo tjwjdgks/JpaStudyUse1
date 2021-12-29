@@ -1,5 +1,6 @@
 package com.study.jpause1.service;
 
+import com.study.jpause1.domain.item.Book;
 import com.study.jpause1.domain.item.Item;
 import com.study.jpause1.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +13,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ItemService {
-    private ItemRepository itemRepository;
+
+    private final ItemRepository itemRepository;
 
     @Transactional
     public void saveItem(Item item){
         itemRepository.save(item);
     }
+
 
     public List<Item> findItems(){
         return itemRepository.findAll();

@@ -8,10 +8,13 @@ import com.study.jpause1.domain.item.Item;
 import com.study.jpause1.repository.ItemRepository;
 import com.study.jpause1.repository.MemberRepository;
 import com.study.jpause1.repository.OrderRepository;
+import com.study.jpause1.repository.OrderSearch;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -52,6 +55,9 @@ public class OrderService {
         // 주문 취소
         order.cancel();
     }
-    // 검색
 
+    // 검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
+    }
 }
