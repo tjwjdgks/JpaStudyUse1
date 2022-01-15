@@ -4,12 +4,18 @@ import com.study.jpause1.domain.Category;
 import com.study.jpause1.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 // 상속 관계이기 때문에 상속 관계 전략을 지정해야한다 // 부모 클래스에 지정한다
+/*
+// toOne 관계일 때
+@BatchSize(size = 100)
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name ="dtype") // 상속 구분자

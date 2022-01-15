@@ -1,4 +1,4 @@
-package com.study.jpause1.repository.ordersimplequery;
+package com.study.jpause1.repository.order.ordersimplequery;
 
 import com.study.jpause1.domain.Address;
 import com.study.jpause1.domain.OrderStatus;

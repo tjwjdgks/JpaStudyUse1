@@ -5,8 +5,8 @@ import com.study.jpause1.domain.Order;
 import com.study.jpause1.domain.OrderStatus;
 import com.study.jpause1.repository.OrderRepository;
 import com.study.jpause1.repository.OrderSearch;
-import com.study.jpause1.repository.ordersimplequery.OrderSimpleQueryRepository;
-import com.study.jpause1.repository.ordersimplequery.SimpleOrderQueryDto;
+import com.study.jpause1.repository.order.ordersimplequery.OrderSimpleQueryRepository;
+import com.study.jpause1.repository.order.ordersimplequery.SimpleOrderQueryDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,7 @@ public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
     private final OrderSimpleQueryRepository orderSimpleQueryRepository;
-
+    /*
     // 엔티티를 노출하기 때문에 비추천 방법 // lazy n+1 문제 발생
     @GetMapping("/api/v1/simple-orders")
     public List<Order> orderV1(){
@@ -44,6 +44,7 @@ public class OrderSimpleApiController {
         }
         return all;
     }
+     */
     // n+1 문제 발생
     @GetMapping("/api/v2/simple-orders")
     public List<SimpleOrderDto> ordersV2(){

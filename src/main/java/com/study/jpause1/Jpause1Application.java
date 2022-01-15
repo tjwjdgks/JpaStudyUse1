@@ -13,7 +13,7 @@ public class Jpause1Application {
     }
 
 
-    // 비추천 // Entity 바로 조회
+    // 비추천 // Entity 바로 조회 // Entity를 바로 쓰기 위해서는 hibernate5Module 이 필요하다 // Jaskon은 프록시 객체를 못 읽는다
     /*
     @Bean
     Hibernate5Module hibernate5Module(){

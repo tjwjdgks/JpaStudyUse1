@@ -75,4 +75,18 @@ public class OrderRepository {
                 "join fetch  o.delivery d",Order.class).getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        // jpa distinct는 sql distinct + 자체적으로 order가 같은 id 이면 중복 제거해준다
+        return em.createQuery("select distinct o from Order o join o.member m join o.delivery d join o.orderItems oi join oi.item i").getResultList();
+
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery("select o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch  o.delivery d",Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }

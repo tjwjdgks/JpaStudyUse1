@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class Order {
     @JoinColumn(name="member_id") // 외래키 매핑할 때 사용, 생략할 수 있음
     private Member member;
 
+    @BatchSize(size = 1000) // 세부적으로 적용하고 싶을 때 // Collection 일때
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
